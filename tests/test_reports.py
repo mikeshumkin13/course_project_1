@@ -1,4 +1,5 @@
 import pytest
+import pandas as pd
 from src.reports import generate_report
 
 def test_generate_report():
