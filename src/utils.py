@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def get_greeting(current_time=None):
     """Возвращает приветствие в зависимости от времени суток."""
     if current_time is None:
