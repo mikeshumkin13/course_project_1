@@ -44,3 +44,12 @@ def get_top_5_transactions(transactions):
     return transactions.nlargest(5, "Сумма операции")[
         ["Дата операции", "Сумма операции", "Категория", "Описание"]
     ]
+
+
+def search_transactions_service(transactions, query):
+    """Ищет транзакции, содержащие запрос в описании или категории."""
+    filtered = transactions[
+        transactions['Описание'].str.contains(query, case=False, na=False) |
+        transactions['Категория'].str.contains(query, case=False, na=False)
+    ]
+    return filtered.to_dict(orient='records')
