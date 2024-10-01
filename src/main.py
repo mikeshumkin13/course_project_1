@@ -1,6 +1,9 @@
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+
+from reports import generate_report
 from views import generate_main_page_response
+from services import filter_operations
 
 # Загрузка переменных окружения из .env
 load_dotenv()
@@ -9,14 +12,46 @@ load_dotenv()
 exchange_rate_api_key = os.getenv('EXCHANGE_RATE_API_KEY')
 alpha_vantage_api_key = os.getenv('ALPHA_VANTAGE_API_KEY')
 
-base_dir = os.path.dirname(os.path.abspath(__file__))  #
-file_path = os.path.join(base_dir, '../data/operations.xlsx')
+base_dir = os.path.dirname(os.path.abspath(__file__))  # Получаем директорию текущего файла
+file_path = os.path.join(base_dir, '../data/operations.xlsx')  # Путь к файлу операций
+
+
+def display_menu():
+    print("Выберите действие:")
+    print("1. Сгенерировать отчет")
+    print("2. Поиск транзакций")
+    print("3. Выход")
+
+
+def generate_report_action():
+    # Логика для генерации отчета
+    print("Генерация отчета...")
+    generate_report(file_path)  # Вызов функции генерации отчета
+
+
+def search_transactions_action():
+    # Логика для поиска транзакций
+    print("Поиск транзакций...")
+    search_term = input("Введите строку для поиска: ")
+    transactions = filter_operations(file_path, search_term)  # Пример вызова функции для поиска
+    print(transactions)  # Вывод найденных транзакций
+
+
+def main():
+    while True:
+        display_menu()
+        choice = input("Введите номер действия: ")
+
+        if choice == '1':
+            generate_report_action()
+        elif choice == '2':
+            search_transactions_action()
+        elif choice == '3':
+            print("Выход...")
+            break
+        else:
+            print("Некорректный выбор, попробуйте снова.")
+
 
 if __name__ == "__main__":
-    # Пример времени, передаваемого в качестве входного параметра
-    input_time = "2024-09-26 14:30:00"
-
-    # Генерация главной страницы
-    main_page_response = generate_main_page_response(input_time, file_path, exchange_rate_api_key,
-                                                     alpha_vantage_api_key)
-    print(main_page_response)
+    main()

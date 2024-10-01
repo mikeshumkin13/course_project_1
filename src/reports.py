@@ -1,6 +1,7 @@
-import pandas as pd
 import json
 from datetime import datetime
+
+import pandas as pd
 
 
 def generate_report(file_path):

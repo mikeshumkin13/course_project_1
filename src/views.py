@@ -1,10 +1,13 @@
-from dotenv import load_dotenv
 import os
-import requests
-from services import read_operations, get_last_4_digits, calculate_total_spent, calculate_cashback, \
-    get_top_5_transactions
-from utils import get_greeting
+
 import pandas as pd
+import requests
+from dotenv import load_dotenv
+
+from services import (calculate_cashback, calculate_total_spent,
+                      get_last_4_digits, get_top_5_transactions,
+                      read_operations)
+from utils import get_greeting
 
 load_dotenv()
 
