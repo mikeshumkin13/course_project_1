@@ -11,17 +11,13 @@ def read_operations(file_path: str) -> pd.DataFrame:
         return pd.DataFrame()  # Возвращаем пустой DataFrame в случае ошибки
 
 
-def filter_operations(
-    df: pd.DataFrame, category: str = None, start_date: str = None, end_date: str = None
-) -> pd.DataFrame:
-    """Фильтрует операции по категории и датам."""
-    if category:
-        df = df[df["Категория"] == category]
-    if start_date:
-        df = df[df["Дата операции"] >= pd.to_datetime(start_date)]
-    if end_date:
-        df = df[df["Дата операции"] <= pd.to_datetime(end_date)]
-    return df
+def search_transactions_service(transactions: pd.DataFrame, query: str) -> list:
+    """Ищет транзакции, содержащие запрос в описании или категории."""
+    filtered = transactions[
+        transactions["Описание"].str.contains(query, case=False, na=False)
+        | transactions["Категория"].str.contains(query, case=False, na=False)
+    ]
+    return filtered.to_dict(orient="records")
 
 
 def get_last_4_digits(card_number):
@@ -44,12 +40,3 @@ def get_top_5_transactions(transactions):
     return transactions.nlargest(5, "Сумма операции")[
         ["Дата операции", "Сумма операции", "Категория", "Описание"]
     ]
-
-
-def search_transactions_service(transactions, query):
-    """Ищет транзакции, содержащие запрос в описании или категории."""
-    filtered = transactions[
-        transactions["Описание"].str.contains(query, case=False, na=False)
-        | transactions["Категория"].str.contains(query, case=False, na=False)
-    ]
-    return filtered.to_dict(orient="records")

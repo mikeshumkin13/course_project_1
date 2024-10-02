@@ -2,19 +2,14 @@ import os
 from dotenv import load_dotenv
 
 from reports import generate_report
-from views import generate_main_page_response
-from services import filter_operations, search_transactions_service, read_operations
+from services import read_operations, search_transactions_service
 
 # Загрузка переменных окружения из .env
 load_dotenv()
 
-# Получаем API ключи из .env
+# Получаем API ключи из .env (если они ещё нужны для других функций)
 exchange_rate_api_key = os.getenv('EXCHANGE_RATE_API_KEY')
 alpha_vantage_api_key = os.getenv('ALPHA_VANTAGE_API_KEY')
-
-base_dir = os.path.dirname(os.path.abspath(__file__))  # Получаем директорию текущего файла
-file_path = os.path.join(base_dir, '../data/operations.xlsx')  # Путь к файлу операций
-
 
 def display_menu():
     print("\nВыберите действие:")
@@ -24,9 +19,11 @@ def display_menu():
 
 
 def generate_report_action():
-    # Логика для генерации отчета
-    print("\nГенерация отчета...")
-    report = generate_report(file_path)  # Вызов функции генерации отчета
+    # Получаем абсолютный путь к файлу operations.xlsx
+    base_dir = os.path.dirname(__file__)  # Директория текущего файла
+    file_path = os.path.abspath(os.path.join(base_dir, '../data/operations.xlsx'))  # Создаем абсолютный путь к файлу
+    print("Генерация отчета...")
+    generate_report(file_path)  # Вызываем функцию с правильным путем
     print("Отчет сгенерирован и сохранен в 'report.json'.")
 
 
