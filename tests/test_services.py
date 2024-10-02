@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from services import get_last_4_digits, calculate_total_spent, calculate_cashback, get_top_5_transactions
+from services import get_last_4_digits, calculate_total_spent, calculate_cashback, get_top_5_transactions, search_transactions_service
 import pandas as pd
 
 def test_get_last_4_digits():
@@ -27,3 +27,13 @@ def test_get_top_5_transactions():
     })
     top_5 = get_top_5_transactions(transactions)
     assert len(top_5) == 2
+    assert list(top_5.columns) == ["Дата операции", "Сумма операции", "Категория", "Описание"]
+
+def test_search_transactions_service():
+    transactions = pd.DataFrame({
+        "Описание": ["Покупка лекарств", "Покупка продуктов"],
+        "Категория": ["Аптеки", "Супермаркеты"]
+    })
+    results = search_transactions_service(transactions, "Аптеки")
+    assert len(results) == 1
+    assert results.iloc[0]['Категория'] == "Аптеки"
