@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 
 from reports import generate_report
 from services import read_operations, search_transactions_service
+from utils import get_greeting
+
 
 # Загрузка переменных окружения из .env
 load_dotenv()
@@ -31,6 +33,7 @@ def search_transactions_action():
     # Логика для поиска транзакций
     print("\nПоиск транзакций...")
     search_term = input("Введите строку для поиска: ")
+    file_path = "/Users/a12345/PycharmProjects/course_project_1/data/operations.xlsx"
     transactions = read_operations(file_path)
     if transactions.empty:
         print("Нет данных для поиска.")
@@ -45,6 +48,10 @@ def search_transactions_action():
 
 
 def main():
+    # Отображаем приветствие
+    greeting = get_greeting()
+    print(f"{greeting}!\nДобро пожаловать в приложение для управления транзакциями.")
+
     while True:
         display_menu()
         choice = input("Введите номер действия: ")

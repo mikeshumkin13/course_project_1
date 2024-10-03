@@ -3,7 +3,6 @@ import pytest
 from unittest.mock import patch
 import pandas as pd
 
-# Убедитесь, что путь к src/ добавлен в sys.path через conftest.py или здесь
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
@@ -74,3 +73,4 @@ def test_search_transactions_action():
             "Дата операции": "2023-01-01",
             "Сумма операции": -500
         })
+
