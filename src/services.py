@@ -37,6 +37,4 @@ def calculate_cashback(total_spent):
 
 def get_top_5_transactions(transactions):
     """Возвращает топ-5 транзакций по сумме."""
-    return transactions.nlargest(5, "Сумма операции")[
-        ["Дата операции", "Сумма операции", "Категория", "Описание"]
-    ]
+    return transactions.nlargest(5, "Сумма операции")[["Дата операции", "Сумма операции", "Категория", "Описание"]]

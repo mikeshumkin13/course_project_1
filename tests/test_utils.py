@@ -1,6 +1,7 @@
 from src.utils import get_greeting
 from datetime import datetime
 
+
 def test_get_greeting():
     morning = datetime(2023, 1, 1, 8, 0, 0)
     assert get_greeting(morning) == "Доброе утро"

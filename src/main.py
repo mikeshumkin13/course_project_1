@@ -10,8 +10,9 @@ from utils import get_greeting
 load_dotenv()
 
 # Получаем API ключи из .env (если они ещё нужны для других функций)
-exchange_rate_api_key = os.getenv('EXCHANGE_RATE_API_KEY')
-alpha_vantage_api_key = os.getenv('ALPHA_VANTAGE_API_KEY')
+exchange_rate_api_key = os.getenv("EXCHANGE_RATE_API_KEY")
+alpha_vantage_api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
+
 
 def display_menu():
     """
@@ -36,7 +37,7 @@ def generate_report_action():
 
     # Получаем абсолютный путь к файлу operations.xlsx
     base_dir = os.path.dirname(__file__)  # Директория текущего файла
-    file_path = os.path.abspath(os.path.join(base_dir, '../data/operations.xlsx'))  # Создаем абсолютный путь к файлу
+    file_path = os.path.abspath(os.path.join(base_dir, "../data/operations.xlsx"))  # Создаем абсолютный путь к файлу
     print("Генерация отчета...")
     generate_report(file_path)  # Вызываем функцию с правильным путем
     print("Отчет сгенерирован и сохранен в 'report.json'.")
@@ -76,11 +77,11 @@ def main():
         display_menu()
         choice = input("Введите номер действия: ")
 
-        if choice == '1':
+        if choice == "1":
             generate_report_action()
-        elif choice == '2':
+        elif choice == "2":
             search_transactions_action()
-        elif choice == '3':
+        elif choice == "3":
             print("Выход...")
             break
         else:
