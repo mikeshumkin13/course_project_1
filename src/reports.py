@@ -5,6 +5,10 @@ import pandas as pd
 
 
 def generate_report(file_path):
+    """
+    Генерирует отчет по транзакциям из Excel-файла и сохраняет его в формате JSON.
+    """
+
     # Чтение данных из Excel
     df = pd.read_excel(file_path)
 

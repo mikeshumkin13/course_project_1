@@ -14,6 +14,14 @@ exchange_rate_api_key = os.getenv('EXCHANGE_RATE_API_KEY')
 alpha_vantage_api_key = os.getenv('ALPHA_VANTAGE_API_KEY')
 
 def display_menu():
+    """
+    Отображает главное меню приложения с доступными действиями.
+    Действия:
+    1. Сгенерировать отчет
+    2. Поиск транзакций
+    3. Выход
+    """
+
     print("\nВыберите действие:")
     print("1. Сгенерировать отчет")
     print("2. Поиск транзакций")
@@ -21,6 +29,11 @@ def display_menu():
 
 
 def generate_report_action():
+    """
+    Генерирует отчет по транзакциям.
+    Читает данные из файла `operations.xlsx`, обрабатывает их и сохраняет отчет в формате JSON.
+    """
+
     # Получаем абсолютный путь к файлу operations.xlsx
     base_dir = os.path.dirname(__file__)  # Директория текущего файла
     file_path = os.path.abspath(os.path.join(base_dir, '../data/operations.xlsx'))  # Создаем абсолютный путь к файлу
@@ -30,6 +43,10 @@ def generate_report_action():
 
 
 def search_transactions_action():
+    """
+    Выполняет поиск транзакций по заданному критерию.
+    Запрашивает у пользователя строку для поиска, фильтрует транзакции и выводит результаты.
+    """
     # Логика для поиска транзакций
     print("\nПоиск транзакций...")
     search_term = input("Введите строку для поиска: ")
@@ -48,7 +65,10 @@ def search_transactions_action():
 
 
 def main():
-    # Отображаем приветствие
+    """
+    Основная функция приложения.
+    Отображает приветствие, меню и обрабатывает пользовательский ввод для выполнения действий.
+    """
     greeting = get_greeting()
     print(f"{greeting}!\nДобро пожаловать в приложение для управления транзакциями.")
 
